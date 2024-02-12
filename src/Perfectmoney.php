@@ -79,8 +79,7 @@ class Perfectmoney extends PerfectmoneyContract
         if (config('perfectmoney.pm_success_callback')) {
             $callback = config('perfectmoney.pm_success_callback');
             $params = ['status' => 'success', 'payment_id' => $request->PAYMENT_ID];
-            $callback($params);
-            return true;
+            return $callback($params);
         }
 
         return ['status' => 'success', 'payment_id' => $request->get('PAYMENT_ID')];
@@ -97,8 +96,7 @@ class Perfectmoney extends PerfectmoneyContract
             if (config('perfectmoney.pm_fail_callback')) {
                 $callback = config('perfectmoney.pm_fail_callback');
                 $params = ['status' => 'failed', 'payment_id' => $request->get('PAYMENT_ID')];
-                $callback($params);
-                return true;
+                return $callback($params);
             }
         }
 
